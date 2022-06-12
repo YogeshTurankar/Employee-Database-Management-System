@@ -3,8 +3,10 @@ My First Java GUI Project, this is java GUI project build using window builder i
 Sqlite database browser was used to create database.
 If it gives connection error, please verify databse path in EmployeeData.java file & install sqlite db browser.
 
-Open src folder and then run Employee.java class.
+Open src folder and then run Login.java class.
 
 
 Below is a screenshot of application window.
-<img width="960" alt="image" src="https://user-images.githubusercontent.com/107146295/172786368-d6f1788c-6a50-4aba-ba84-f9c3e45a0527.png">
+<img width="407" alt="image" src="https://user-images.githubusercontent.com/107146295/173231544-46772a5e-70c3-4556-b13b-efd9debfc658.png">
+<img width="960" alt="image" src="https://user-images.githubusercontent.com/107146295/173231567-49ef324a-2264-4692-95d2-a5dfba056d5a.png">
+
