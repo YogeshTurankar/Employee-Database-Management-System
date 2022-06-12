@@ -26,11 +26,10 @@ import java.awt.event.FocusEvent;
 import javax.swing.border.LineBorder;
 import javax.swing.SwingConstants;
 import java.awt.Toolkit;
-import javax.swing.ImageIcon;
 
 public class Employee{
 
-	private JFrame frame;
+	JFrame frame;
 	private JTable table;
 	private JTextField jtextEmployeeID;
 	private JTextField jtextNINumber;
@@ -75,11 +74,10 @@ public class Employee{
 	 */
 	public Employee() {
 		initialize();
+		con = Database_Connection.connectDB();
 
-		con = EmployeeData.connectDB();
-
-		Object col[] = { "EmpID", "NINumber", "Firstname", "Lastname", "Gender", "DOB", "Age", "Salary" };
-		model.setColumnIdentifiers(col);
+//		Object col[] = { "EmpID", "NINumber", "Firstname", "Lastname", "Gender", "DOB", "Age", "Salary" };
+//		model.setColumnIdentifiers(col);
 	}
 
 	/**
@@ -89,7 +87,7 @@ public class Employee{
 		frame = new JFrame();
 		frame.setIconImage(Toolkit.getDefaultToolkit().getImage(Employee.class.getResource("/Images/book.png")));
 		frame.getContentPane().setFocusTraversalPolicyProvider(true);
-		frame.getContentPane().setBackground(Color.GRAY);
+		frame.getContentPane().setBackground(new Color(214, 219, 223));
 		frame.setBounds(0, 0, 1450, 800);
 		frame.setExtendedState(6);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -195,17 +193,6 @@ public class Employee{
 						JOptionPane.showMessageDialog(null, ev);
 					}
 
-//					DefaultTableModel model = (DefaultTableModel) table.getModel();
-//					model.addRow(new Object[] { jtextEmployeeID.getText(), jtextNINumber.getText(),
-//							jtextFirstName.getText(), jtextLastName.getText(), jtextGender.getText(),
-//							jtextDOB.getText(), jtextAge.getText(), jtextSalary.getText() });
-//
-//					if (table.getRowCount() == -1) {
-//						if (table.getRowCount() == 0) {
-//							JOptionPane.showMessageDialog(null, "Membership update confirmed",
-//									"Employee database system", JOptionPane.OK_OPTION);
-//						}
-//					}
 				} else {
 					JOptionPane.showMessageDialog(null, "Please Fill all Fields");
 				}
@@ -389,7 +376,7 @@ public class Employee{
 		frame.getContentPane().add(btnNewButton_1_1);
 
 		JButton btnNewButton_1_1_1 = new JButton("Exit");
-		btnNewButton_1_1_1.setBackground(new Color(235, 77, 75));
+		btnNewButton_1_1_1.setBackground(new Color(192, 57, 43));
 		btnNewButton_1_1_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				frame = new JFrame("Exit");
@@ -417,7 +404,7 @@ public class Employee{
 		btnShowData.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 
-				con = EmployeeData.connectDB();
+				con = Database_Connection.connectDB();
 
 				String sql = "SELECT * FROM EmployeeDetails";
 
@@ -481,8 +468,8 @@ public class Employee{
 				String searchbox = textSearch.getText().toUpperCase();
 
 				if (searchbox.toCharArray().length != 0) {
-					con = EmployeeData.connectDB();
-
+					con = Database_Connection.connectDB();
+					boolean hasRow = false;
 					String sql = "SELECT * FROM EmployeeDetails where " + searchBoxSelectedItem + "=" + '"' + searchbox + '"';
 
 					try {
@@ -492,7 +479,9 @@ public class Employee{
 						md.setRowCount(0);
 						Object[] columnDats = new Object[8];
 
-						while (rs.next()) {
+						while (rs.next()) { 
+							hasRow=true;
+							
 							columnDats[0] = rs.getString("EmployeeID");
 							columnDats[1] = rs.getString("NINumber");
 							columnDats[2] = rs.getString("Firstname");
@@ -501,15 +490,20 @@ public class Employee{
 							columnDats[5] = rs.getString("DOB");
 							columnDats[6] = rs.getString("Age");
 							columnDats[7] = rs.getString("Salary");
-
+							
 							md.addRow(columnDats);
+							
+						}if(hasRow==true) {
+							
+						}else {
+							JOptionPane.showMessageDialog(null, "No data found");
 						}
 					} catch (Exception ec) {
 						JOptionPane.showInternalMessageDialog(null, ec);
 					}
 
 				} else {
-					JOptionPane.showInternalMessageDialog(null, "Please Enter Search Data");
+					JOptionPane.showInternalMessageDialog(null, "Please Enter Valid Search Data");
 				}
 			}
 		});
@@ -547,7 +541,7 @@ public class Employee{
 			public void mouseClicked(MouseEvent e) {
 				String deletebox = textDelete.getText().toUpperCase();
 				if (deletebox.toCharArray().length != 0) {
-					con = EmployeeData.connectDB();
+					con = Database_Connection.connectDB();
 					String sql = "DELETE FROM EmployeeDetails WHERE " + deleteBoxSelectedItem + "=" + "'" + deletebox + "'";
 
 					try {

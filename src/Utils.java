@@ -17,7 +17,7 @@ public class Utils extends Employee {
 	static ResultSet rs = null;
 
 	public static int empID() {
-		con = EmployeeData.connectDB();
+		con = Database_Connection.connectDB();
 
 		String sql = "SELECT EmployeeID FROM EmployeeDetails order by EmployeeID desc limit 1";
 
@@ -39,7 +39,7 @@ public class Utils extends Employee {
 	}
 
 	public static int NIID() {
-		con = EmployeeData.connectDB();
+		con = Database_Connection.connectDB();
 
 		String sql = "SELECT NINumber FROM EmployeeDetails order by NINumber desc limit 1";
 

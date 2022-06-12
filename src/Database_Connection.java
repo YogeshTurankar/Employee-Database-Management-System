@@ -4,7 +4,7 @@ import java.sql.SQLException;
 
 import javax.swing.JOptionPane;
 
-public class EmployeeData {
+public class Database_Connection {
 
 	
 	public static Connection connectDB() {
