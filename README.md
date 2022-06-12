@@ -6,7 +6,7 @@ If it gives connection error, please verify databse path in EmployeeData.java fi
 Open src folder and then run Login.java class.
 
 
-Below is a screenshot of application window.
+
 <img width="407" alt="image" src="https://user-images.githubusercontent.com/107146295/173231544-46772a5e-70c3-4556-b13b-efd9debfc658.png">
 <img width="960" alt="image" src="https://user-images.githubusercontent.com/107146295/173231567-49ef324a-2264-4692-95d2-a5dfba056d5a.png">
 
